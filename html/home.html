@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlfixD API - Powering Your Applications</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+    <style>
+        /* --- Variabel Warna Sesuai Referensi --- */
+        :root {
+            --bg-color: #020617;
+            --card-bg-color: rgba(30, 41, 59, 0.5);
+            --border-color: rgba(55, 65, 81, 0.7);
+            --primary-glow: rgba(59, 130, 246, 0.2);
+            --primary-gradient-start: #3b82f6;
+            --primary-gradient-end: #6366f1;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        /* --- Reset & Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Efek Background Khas --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.15), transparent 40%),
+                radial-gradient(circle at 50% 70%, rgba(99, 102, 241, 0.1), transparent 40%);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Navbar Mengambang (Floating Navbar) --- */
+        .header {
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Tombol --- */
+        .btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--card-bg-color);
+        }
+        
+        /* --- Hero Section dengan Kartu --- */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            box-shadow: 0 0 40px var(--primary-glow);
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* --- Teks Gradasi --- */
+        .gradient-text {
+            background-image: linear-gradient(to right, var(--text-primary) 20%, var(--primary-gradient-end) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg-color);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--primary-glow);
+        }
+
+        .feature-icon-wrapper {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-image: linear-gradient(to right, var(--primary-gradient-start), var(--primary-gradient-end));
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+        }
+        
+        /* --- Footer --- */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 920px) {
+            .navbar {
+                border-radius: 20px;
+            }
+            .nav-menu {
+                display: none; /* Disembunyikan, akan dihandle JS */
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">AlfixD API</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">Docs</a></li>
+                <li><a href="#" class="nav-link">Status</a></li>
+                <li><a href="#" class="nav-link">Pricing</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-card">
+                <h1 class="hero-title gradient-text">Powerful & Simple BRAT API</h1>
+                <p class="hero-description">
+                    Integrate our reliable and fast API into your application with just a few lines of code. Built for developers.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/docs" class="btn btn-outline">Read The Docs</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-bolt-lightning feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title">Blazing Fast</h3>
+                    <p class="feature-description">Our API is optimized for speed, with an average response time of less than 50ms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-shield-halved feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title">Secure & Reliable</h3>
+                    <p class="feature-description">Built with top-tier security and a 99.9% uptime guarantee to keep your service running.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-code feature-icon"></i>
+                    </div>
+                    <h3 class="feature-title">Easy to Integrate</h3>
+                    <p class="feature-description">Simple and clean documentation that helps you get started in minutes, not hours.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 AlfixD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Note: Untuk tampilan mobile, menu navigasi disembunyikan.
+        // Anda perlu menambahkan JavaScript tambahan untuk membuat hamburger menu berfungsi
+        // jika ingin menampilkan menu di mobile. Untuk saat ini, fokusnya pada visual desktop.
+    </script>
+</body>
+</html>
