@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Query, Request
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response
 from playwright.async_api import async_playwright
 import os, uuid, shutil, asyncio, time, stat
 from collections import defaultdict
