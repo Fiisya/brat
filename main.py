@@ -265,5 +265,6 @@ async def download_file(filename: str):
 
 @app.get("/")
 async def root():
-    return {"status": "ok", "service": "brat-generator", "output_dir": OUTPUT_DIR, "tmp_dir": TMP_DIR}
+    file_path = os.path.join(os.path.dirname(__file__), "html", "home.html")
+    return FileResponse(file_path)
     
